@@ -60,13 +60,12 @@ class KeyMetadata: GLib.Object{
         //nominal_values;
     }
 
-    public int getNominalCount() throws NominalError{
+    public int getNominalCount() throws TypeError{
         if(this.type != AttributeType.NOMINAL)
-            throw new NominalError.NOT_NOMINAL("this isn't nominal");
+            throw new TypeError.NOT_NOMINAL("this isn't nominal");
         return this.nominal_values.size;
     }
 }
 
-public errordomain NominalError{
-    NOT_NOMINAL
-}
+
+

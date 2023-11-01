@@ -24,5 +24,8 @@ int main (string[] args)
 {
     string path = "/home/eka/Projects/Lab1/iris.arff";
     Document doc = IOUtil.read_file (path);
+    doc.buildIndex ();
+    //Gee.List<string> numberVectors = generate_random_string (10000, 6);
+    //Gee.Map<string, Gee.List> index = createIndex(numberVectors);
     return 0;
 }
