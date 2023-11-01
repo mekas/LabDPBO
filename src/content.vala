@@ -58,7 +58,7 @@ class Content: GLib.Object {
         return map.get(attributeName);
     }
 
-    public float getFloatEntry(string attributeName){
+    public float getFloatEntry(string attributeName) throws TypeError{
         //get Metadata
         Metadata meta = this.doc.metadata;
         KeyMetadata keyMeta = meta.heading.get(attributeName);
@@ -69,7 +69,7 @@ class Content: GLib.Object {
         throw new TypeError.NOT_FLOAT("The data wasn't a float");
     }
 
-    public double getDoubleEntry(string attributeName){
+    public double getDoubleEntry(string attributeName) throws TypeError{
         Metadata meta = this.doc.metadata;
         KeyMetadata keyMeta = meta.heading.get(attributeName);
         if(keyMeta.type == AttributeType.REAL){
@@ -79,7 +79,7 @@ class Content: GLib.Object {
         throw new TypeError.NOT_DOUBLE("The data wasn't a double");
     }
 
-    public string getStringEntry(string attributeName){
+    public string getStringEntry(string attributeName) throws TypeError{
         Metadata meta = this.doc.metadata;
         KeyMetadata keyMeta = meta.heading.get(attributeName);
         if(keyMeta.type == AttributeType.NOMINAL){
