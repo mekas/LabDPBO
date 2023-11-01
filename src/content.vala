@@ -43,16 +43,16 @@ class Content: GLib.Object {
     }
 
 
-    float getFloatEntry(string attributeName) throws TypeErrorCasting{
-
+    public float? getFloatEntry(string attributeName) throws TypeErrorCasting{
+        return null;
     }
 
-    public getDoubleEntry(string attributeName) throws TypeErrorCasting{
-
+    public double? getDoubleEntry(string attributeName) throws TypeErrorCasting{
+        return null;
     }
 
-    public getStringEntry(string attributeName) throws TypeErrorCasting{
-
+    public string getStringEntry(string attributeName) throws TypeErrorCasting{
+        return null;
     }
 }
 
