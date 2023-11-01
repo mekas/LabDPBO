@@ -1,0 +1,41 @@
+{
+    "app-id" : "unj.dpbo.lab1",
+    "runtime" : "org.freedesktop.Platform",
+    "runtime-version" : "22.08",
+    "sdk" : "org.freedesktop.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.vala"
+    ],
+    "command" : "lab1",
+    "finish-args" : [
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/vala/bin",
+        "prepend-ld-library-path" : "/usr/lib/sdk/vala/lib"
+    },
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "/share/vala",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "lab1",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/eka/Projects"
+                }
+            ]
+        }
+    ]
+}
