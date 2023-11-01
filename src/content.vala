@@ -5,10 +5,11 @@ class Content: GLib.Object {
     //private char[] _id = new char[12];
     private uint32[] id = new uint32[3];
     private static uint32 sequence = 0;
-    public uint64 createdOn { get; set; }
-    public uint64 updatedOn { get; set; }
+    public int64 createdOn { get; set; }
+    public int64 updatedOn { get; set; }
     //keys are column heading, while values are the data rows
     private Gee.Map<string, Any> map;
+    private weak Document doc;
 
     // to generate uid call here
     private void generateUid(){
@@ -19,6 +20,7 @@ class Content: GLib.Object {
         uint64 utime = (uint64) time;
         id[0] =  (uint32) (utime & 0xffffffff);
         id[1] = GLib.Random.next_int();
+
     }
 
     /**
@@ -26,15 +28,36 @@ class Content: GLib.Object {
      * immediately set unique id to class
      * the class must be parameterized
      */
-    public Content() {
+    public Content(Document doc) {
         this.generateUid();
         map = new HashMap<string, Any>();
         // now we loop the heading
+        this.createdOn = new GLib.DateTime.now_local().to_unix();
+        this.doc = doc;
     }
 
-    public void insertEntry(string attributeName, Any any){
+    public void setEntry(string attributeName, Any any){
         map.set(attributeName, any);
+        this.updatedOn = new GLib.DateTime.now_local().to_unix();
+        this.doc.updatedOn = this.updatedOn;
     }
+
+
+    float getFloatEntry(string attributeName) throws TypeErrorCasting{
+
+    }
+
+    public getDoubleEntry(string attributeName) throws TypeErrorCasting{
+
+    }
+
+    public getStringEntry(string attributeName) throws TypeErrorCasting{
+
+    }
+}
+
+public errordomain TypeErrorCasting {
+    NOT_FLOAT, NOT_DOUBLE, NOT_STRING
 }
 
 

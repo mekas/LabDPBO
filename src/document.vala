@@ -6,7 +6,8 @@ class Document: GLib.Object{
     private static int uid=0;
     private Gee.List<Content> list;// = new Content<double?>();
     public Metadata metadata{get;set;}
-    public int64 createdTime;
+    public int64 createdOn;
+    public int64 updatedOn;
 
     /**
      * initialize empty values of rows
@@ -18,7 +19,7 @@ class Document: GLib.Object{
         GLib.Math.pow(10,2);
         uid++;
         list = new Gee.UnrolledLinkedList<Content>();
-        createdTime = new GLib.DateTime.now_local().to_unix();
+        createdOn = new GLib.DateTime.now_local().to_unix();
     }
 
     public void insertData(string line){
@@ -26,7 +27,7 @@ class Document: GLib.Object{
         // then read metadata to arrange collection by metadata type
         string[] word = line.split(",");
         // return an immutable heading keys which we'll be using to loop'
-        Content array = new Content();
+        Content array = new Content(this);
         foreach(var entry in metadata.heading){
             //read the type of attribute type first
             AttributeType type = metadata.heading.get(entry.key).type;
@@ -34,14 +35,17 @@ class Document: GLib.Object{
                 case AttributeType.NUMERIC:
                     double val = double.parse(word[entry.value.index]);
                     Any<double?> any = new Any<double?>(val);
-                    array.insertEntry(entry.key, any);
+                    array.setEntry(entry.key, any);
                     break;
                 case AttributeType.REAL:
                     float val  = float.parse(word[entry.value.index]);
                     Any<float?> any = new Any<float?>(val);
-                    array.insertEntry(entry.key, any);
+                    array.setEntry(entry.key, any);
                     break;
                 case AttributeType.NOMINAL:
+                    string val  = (word[entry.value.index]);
+                    Any<string> any = new Any<string>(val);
+                    array.setEntry(entry.key, any);
                     break;
             }
         }
