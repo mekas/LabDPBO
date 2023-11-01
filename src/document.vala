@@ -8,6 +8,7 @@ class Document: GLib.Object{
     public Metadata metadata{get;set;}
     public int64 createdOn;
     public int64 updatedOn;
+    private Gee.Map<string, Content> map;
 
     /**
      * initialize empty values of rows
@@ -18,8 +19,35 @@ class Document: GLib.Object{
         metadata = new Metadata();
         GLib.Math.pow(10,2);
         uid++;
-        list = new Gee.UnrolledLinkedList<Content>();
+        list = new Gee.UnrolledLinkedList<Content>(isContentEqual);
         createdOn = new GLib.DateTime.now_local().to_unix();
+        map = new HashMap<string, Content>();
+    }
+
+    public void buildIndex(){
+        //loop through all content/rows to get the uid
+        foreach(var content in list){
+            string uid = content.getUid();
+            map.set(uid, content);
+        }
+    }
+
+    public void buildAlternateIndex(){
+        //call sort for the current in order to loop by order
+        this.list.sort(compareContent);
+        
+    }
+
+    public Content? getContentByUidThroughIndex(string uid){
+        return map.get(uid);
+    }
+
+    public Content? getContentByUid(string uid){
+        foreach(var content in list){
+            if(content.getUid() == uid)
+                return content;
+        }
+        return null;
     }
 
     public void insertData(string line){

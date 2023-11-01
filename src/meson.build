@@ -1,6 +1,6 @@
 lab1_sources = [
   'main.vala','document.vala', 'content.vala','any.vala',
-  'type.vala', 'metadata.vala', 'ioutil.vala'
+  'type.vala', 'metadata.vala', 'ioutil.vala', 'util.vala'
 ]
 
 lab1_deps = [

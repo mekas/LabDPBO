@@ -6,7 +6,7 @@
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.vala"
     ],
-    "command" : "lab1",
+    "command" : "labDPBO",
     "finish-args" : [
     ],
     "build-options" : {
@@ -27,7 +27,7 @@
     ],
     "modules" : [
         {
-            "name" : "lab1",
+            "name" : "labDPBO",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
