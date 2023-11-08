@@ -22,7 +22,7 @@ using GLib;
 
 int main (string[] args)
 {
-    string path = "/home/eka/Projects/Lab1/iris.arff";
+    string path = "/home/eka/Projects/LabDPBO/iris.arff";
     Document doc = IOUtil.read_file (path);
     return 0;
 }

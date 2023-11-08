@@ -22,12 +22,14 @@ class Content: GLib.Object {
         _id[0] =  (uint32) (utime & 0xffffffff);
         _id[1] = GLib.Random.next_int();
         this.transformId();
+        this.doc = doc;
     }
 
     private void transformId(){
         char* temp = (char *) _id;
         for(int i=0; i< id.length;i++){
             id[i] = *temp;
+            temp++;
         }
     }
 
