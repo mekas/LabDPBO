@@ -3,7 +3,6 @@ using GLib;
 using Posix;
 
 class Content: GLib.Object {
-    private char[] id = new char[12];
     private uint32[] _id = new uint32[3];
 
     private static uint32 sequence = 0;
@@ -37,20 +36,33 @@ class Content: GLib.Object {
         uint64 utime = (uint64) time;
         _id[0] =  (uint32) (utime & 0xffffffff);
         _id[1] = GLib.Random.next_int();
-        memcpy((void *) &id[0], (void *) &_id[0], 4);
-        memcpy((void *) &id[4], (void *) &_id[1], 4*sizeof(char));
-        memcpy((void *) &id[8], (void *) &_id[2], 4*sizeof(char));
+    }
+
+    /**
+    * 
+    */
+    private string uidToHexChar(char[] uid){
+        string res = "";
+        //loop per byte
+        foreach(char c in uid){
+            //split a byte into two hex
+            
+            res += c.to_string();
+         }
+         print(res + "\n");
+         return res;
     }
 
     /*
      * Concatenate all char as string
      */
     public string getUid(){
-        string ret = "";
-        foreach(var ch in this.id){
-            ret += ch.to_string();
-        }
-        return ret;
+        char[] id = new char[12];
+        memcpy((void *) &id[0], (void *) &_id[0], 4);
+        memcpy((void *) &id[4], (void *) &_id[1], 4*sizeof(char));
+        memcpy((void *) &id[8], (void *) &_id[2], 4*sizeof(char));
+        string res = this.uidToHexChar(id);
+        return res;
     }
 
     public Any? getEntry(string attributeName){

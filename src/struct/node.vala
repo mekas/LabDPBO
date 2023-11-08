@@ -21,8 +21,15 @@ class Node<G, T>: GLib.Object{
     // if not initialized, children default to null
     public Gee.List<Node <G,T>>? children;
 
-    public Node(){
-        children = new LinkedList<Node>();
+    /**
+    * Our constructor assume our string is "abc"
+    * then key is "a"
+    * val is the remainder string "bc"
+    */
+    public Node(G key, T val){
+        this.key = key;
+        this.val = val;
+        children = new Gee.LinkedList<Node>();
     }
 
     public void addChild(Node node){

@@ -69,7 +69,11 @@ bool isContentEqual(Content a, Content b){
 
 int compareContent(Content a, Content b){
     //get the timestamp part of Uid from each content
-    int timeA = (int) a.getTimeStamp();
-    int timeB = (int) b.getTimeStamp();
-    return timeA - timeB;
+    string uid1 =  a.getUid();
+    string uid2 = b.getUid();
+    if(uid1 < uid2)
+        return -1;
+    else if(uid1 > uid2)
+        return 1; 
+    return 0;
 }
