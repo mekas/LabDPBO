@@ -37,9 +37,9 @@ class Content: GLib.Object {
         uint64 utime = (uint64) time;
         _id[0] =  (uint32) (utime & 0xffffffff);
         _id[1] = GLib.Random.next_int();
-        memcpy((void *)_id[0], (void *) id[0], 4*sizeof(char));
-        memcpy((void *)_id[1], (void *) id[4], 4*sizeof(char));
-        memcpy((void *)_id[2], (void *) id[8], 4*sizeof(char));
+        memcpy((void *) &id[0], (void *) &_id[0], 4);
+        memcpy((void *) &id[4], (void *) &_id[1], 4*sizeof(char));
+        memcpy((void *) &id[8], (void *) &_id[2], 4*sizeof(char));
     }
 
     /*

@@ -22,7 +22,7 @@ using GLib;
 
 int main (string[] args)
 {
-    string path = "/home/eka/Projects/Lab1/iris.arff";
+    string path = "/home/eka/Projects/LabDPBO/iris.arff";
     Document doc = IOUtil.read_file (path);
     doc.buildIndex ();
     //Gee.List<string> numberVectors = generate_random_string (10000, 6);
