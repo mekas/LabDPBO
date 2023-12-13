@@ -11,6 +11,9 @@ class Content: GLib.Object {
     //keys are column heading, while values are the data rows
     private Gee.Map<string, Any> map;
 
+    //public static int staticVar = 0;
+    //public static Gee.ArrayList<int> staticList = new Gee.ArrayList<int>();
+
     //we need a reference to parent class
     private weak Document doc;
 
@@ -20,6 +23,9 @@ class Content: GLib.Object {
      * the class must be parameterized
      */
     public Content(Document doc) {
+        //staticList.add(staticVar);
+        //staticVar++;
+        //print("%d\n", staticList.size);
         this.generateUid();
         map = new HashMap<string, Any>();
         this.createdOn = new GLib.DateTime.now_local().to_unix();
@@ -46,8 +52,18 @@ class Content: GLib.Object {
         //loop per byte
         foreach(char c in uid){
             //split a byte into two hex
-            
-            res += c.to_string();
+            char upper_hex = ((c >> 4) & 0xf);
+            char lower_hex = (c & 0xf);
+            if(upper_hex < 0xa)
+                upper_hex += '0';
+            else
+                upper_hex += 'a' - 10;
+            if(lower_hex < 0xa)
+                lower_hex += '0';
+            else
+                lower_hex += 'a' - 10;
+            res += upper_hex.to_string();
+            res += lower_hex.to_string();
          }
          print(res + "\n");
          return res;

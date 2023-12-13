@@ -29,6 +29,9 @@ class Document: GLib.Object{
         this.createdOn = new GLib.DateTime.now_local().to_unix();
         uidMap = new Gee.HashMap<string, Content>();
         //this.updatedOn = setUpdatedOn();
+        //Content.staticList = new Gee.ArrayList<int>();
+        //Content.staticList.add(2);
+        //print("%d\n", Content.staticList.size);
     }
 
     /**
